@@ -4,4 +4,11 @@
 - [x] Authentication
 - [x] Arch.
 - [x] Styles
-- [ ] Login/ Sign Up
+
+## Screens
+
+- [x] Login
+- [ ] Sign Up
+- [ ] Feed
+- [ ] Profile
+- [ ] See Hashtag
