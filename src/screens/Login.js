@@ -13,6 +13,7 @@ import Separator from "../components/auth/Separator";
 import PageTitle from "../components/PageTitle";
 import routes from "../routes";
 import { logUserIn } from "../apollo";
+import { useLocation } from "react-router";
 
 const FacebookLogin = styled.div`
   color: #385285;
@@ -20,6 +21,10 @@ const FacebookLogin = styled.div`
     margin-left: 10px;
     font-weight: 600;
   }
+`;
+
+const Notification = styled.div`
+  color: #2ecc71;
 `;
 
 const LOGIN_MUTATION = gql`
@@ -33,8 +38,13 @@ const LOGIN_MUTATION = gql`
 `;
 
 function Login() {
+    const location = useLocation();//usehistory에서 보내온 값 사용가능
     const {register,handleSubmit,errors,formState,getValues,setError,clearErrors} = useForm({
         mode:"onChange",
+        defaultValues: {
+            username: location?.state?.username || "",
+            password: location?.state?.password || "",
+        },
     });//mode --> form의 유효성을 검증하는 많은 모드 존재
     //register --> 태그에 ref 사용 각각 태그 식별을 위해 name 사용
     //watch --> value 확인
@@ -79,6 +89,7 @@ function Login() {
                 <div>
                     <FontAwesomeIcon icon={faInstagram} size="3x"/>
                 </div>
+                <Notification>{location?.state?.message}</Notification>
                 <form onSubmit={handleSubmit(onSubmitValid)}>
                     <Input 
                         ref={register({
@@ -103,9 +114,9 @@ function Login() {
                         name="password" 
                         type="password" 
                         placeholder="Password"
-                        hasError={Boolean(errors?.username?.message)}
+                        hasError={Boolean(errors?.password?.message)}
                     />
-                    <FormError message={errors?.username?.message}/>
+                    <FormError message={errors?.password?.message}/>
                     <Button 
                         type="submit" 
                         value={loading ? "Loading..." : "Log in"} 
