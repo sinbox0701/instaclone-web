@@ -1,4 +1,5 @@
-import { ApolloClient, InMemoryCache, makeVar } from "@apollo/client";
+import { ApolloClient, createHttpLink, InMemoryCache, makeVar } from "@apollo/client";
+import {setContext} from"@apollo/client/link/context"
 
 const TOKEN = "TOKEN";
 const DARK_MODE = "DARK_MODE";
@@ -23,8 +24,20 @@ export const enableDarkMode = () => {
     darkModeVar(false);
 };
 
-export const client = new ApolloClient({
+const httpLink = createHttpLink({
     uri:"http://localhost:4000/graphql",
-    cache: new InMemoryCache(),
 });
-//cache --> Apollo가 한번 가져온 정보를 기억해서 다시 안가져와도 되게 도와줌
+
+const authLink = setContext((_,{headers})=>{
+    return {
+        headers:{
+            ...headers,
+            token:localStorage.getItem(TOKEN)
+        }
+    };
+});//request의 context 설정
+
+export const client = new ApolloClient({
+    link:authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+});//link --> data 소통 방법
