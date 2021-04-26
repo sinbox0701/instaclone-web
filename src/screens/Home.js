@@ -1,5 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { faBookmark, faComment, faHeart, faPaperPlane } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as SolidHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import {  logUserOut } from "../apollo";
@@ -20,6 +21,7 @@ const FEED_QUERY = gql`
             comments
             createdAt
             isMine
+            isLiked
         }
     }
 `;
@@ -88,6 +90,9 @@ function Home() {
                     <PhotoData>
                         <PhotoActions>
                             <div>
+                                <PhotoAction>
+                                    <FontAwesomeIcon style={{color:photo.isLiked ? "tomato" : "inherit"}} icon={photo.isLiked ? SolidHeart: faHeart} />
+                                </PhotoAction>
                                 <PhotoAction>
                                     <FontAwesomeIcon size={"2x"} icon={faHeart} />
                                 </PhotoAction>
