@@ -8,7 +8,7 @@
 ## Screens
 
 - [x] Login
-- [ ] Sign Up
+- [x] Sign Up
 - [ ] Feed
 - [ ] Profile
 - [ ] See Hashtag

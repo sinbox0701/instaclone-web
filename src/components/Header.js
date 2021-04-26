@@ -61,7 +61,7 @@ function Header(){
         <SHeader>
             <Wrapper>
                 <Column>
-                    <FontAwesomeIcon icon={faInstagram} />
+                    <FontAwesomeIcon icon={faInstagram} size="lg" />
                 </Column>
                 <Column>
                     {isLoggedIn ? (
