@@ -81,28 +81,21 @@ function Photo({ id, user, file, isLiked, likes,caption,commentNumber,comments }
             },
         } = result;
         if (ok) {
-            const fragmentId = `Photo:${id}`;
-            const fragment = gql`
-                fragment BSName on Photo {
-                    isLiked
-                    likes
-                }
-            `;
-            const result = cache.readFragment({
-                id: fragmentId,
-                fragment,
-            });
-            if ("isLiked" in result && "likes" in result) {
-                const { isLiked: cacheIsLiked, likes: cacheLikes } = result;
-                cache.writeFragment({
-                    id: fragmentId,
-                    fragment,
-                    data: {
-                        isLiked: !cacheIsLiked,
-                        likes: cacheIsLiked ? cacheLikes - 1 : cacheLikes + 1,
+            const photoId = `Photo:${id}`;
+            cache.modify({//apollo client 3부터 cache modify 사용 가능, 바꾸려는 Object의 id와 field민 적어주면 ok
+                id:photoId,
+                fields:{
+                    isLiked(prev){
+                        return !prev;
                     },
-                });
-            }
+                    likes(prev){
+                        if(isLiked){
+                            return prev - 1;
+                        }
+                        return prev + 1;
+                    }
+                }
+            });
         }
     };
     const [toggleLikeMutation] = useMutation(TOGGLE_LIKE_MUTATION, {
