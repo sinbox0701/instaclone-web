@@ -10,5 +10,5 @@
 - [x] Login
 - [x] Sign Up
 - [x] Feed
-- [ ] Profile
-- [ ] See Hashtag
+- [x] Profile
+- [x] See Hashtag
