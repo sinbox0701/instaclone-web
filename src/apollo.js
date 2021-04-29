@@ -39,5 +39,13 @@ const authLink = setContext((_,{headers})=>{
 
 export const client = new ApolloClient({
     link:authLink.concat(httpLink),
-    cache: new InMemoryCache(),
-});//link --> data 소통 방법
+    cache: new InMemoryCache({
+        typePolicies:{
+            User:{
+                keyFields: (obj) => `User:${obj.username}`
+            }
+        }
+    }),
+});
+//typePolicies --> 변경하고자하는 타입 지정
+//keyFields --> key값을 무엇으로 하시겠나요? ==> username
