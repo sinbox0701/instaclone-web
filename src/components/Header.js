@@ -1,6 +1,6 @@
 import { useReactiveVar } from "@apollo/client";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-import { faCompass, faHome, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCompass, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -31,14 +31,6 @@ const Column = styled.div``;
 
 const Icon = styled.span`
   margin-left: 15px;
-`;
-
-const Btn = styled.span`
-  background-color: ${(props) => props.theme.accent};
-  color: white;
-  border-radius: 4px;
-  padding: 5px 15px;
-  font-weight: 600;
 `;
 
 const Button = styled.span`

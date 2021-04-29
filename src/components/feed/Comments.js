@@ -120,9 +120,9 @@ function Comments({ photoId, author, caption, commentNumber, comments }) {
                 isMine={comment.isMine}
             />
             ))}
-            <div>
+            <PostCommentContainer>
                 <form onSubmit={handleSubmit(onValid)}>
-                    <input 
+                    <PostCommentInput 
                         name="payload"
                         ref={register({
                             required:true
@@ -131,7 +131,7 @@ function Comments({ photoId, author, caption, commentNumber, comments }) {
                         placeholder="Write a comment..."
                     />
                 </form>
-            </div>
+            </PostCommentContainer>
         </CommentsContainer>
     );
 }
