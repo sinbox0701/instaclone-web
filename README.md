@@ -9,6 +9,6 @@
 
 - [x] Login
 - [x] Sign Up
-- [ ] Feed
+- [x] Feed
 - [ ] Profile
 - [ ] See Hashtag
