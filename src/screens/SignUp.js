@@ -56,7 +56,6 @@ function SignUp() {
         const {
             createAccount:{
                 ok,
-                error
             }
         }= data ;
         if(!ok){
